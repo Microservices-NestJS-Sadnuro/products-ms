@@ -92,6 +92,8 @@ export class ProductsService { //implements OnModuleInit {
     //   where: { id: id }
     // })
 
+    await this.findOne(id);
+
     // Soft delete
     const product = await this.prisma.product.update({
       where: { id: id },
