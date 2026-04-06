@@ -8,12 +8,7 @@ import { FindProductsDto } from './dto/find-products.dto';
 import { catchError } from 'rxjs';
 
 @Injectable()
-export class ProductsService { //implements OnModuleInit {
-  // onModuleInit() {
-  //   this.$connect();
-  //   console.log('Database connected');
-  // }
-
+export class ProductsService {
   constructor(private prisma: PrismaService) { }
 
   create(createProductDto: CreateProductDto) {
@@ -86,14 +81,7 @@ export class ProductsService { //implements OnModuleInit {
   }
 
   async remove(id: number) {
-    // Hard delete
-    // await this.findOne(id);
-    // return await this.prisma.product.delete({
-    //   where: { id: id }
-    // })
-
     await this.findOne(id);
-
     // Soft delete
     const product = await this.prisma.product.update({
       where: { id: id },

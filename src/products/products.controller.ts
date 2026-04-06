@@ -27,15 +27,11 @@ export class ProductsController {
 
   @MessagePattern({ cmd: 'find_many_by_ids' })
   findManyByIds(@Payload() findProductsDto: FindProductsDto) {
-    console.log('Entry Produdts MS Controller - findManyByIds', findProductsDto);
     return this.productsService.findManyByIds(findProductsDto.productIds);
   }
 
-  //@Patch(':id)
   @MessagePattern({ cmd: 'update_product' })
   update(
-    //@Param('id', ParseIntPipe) id: number, 
-    //@Body() updateProductDto: UpdateProductDto
     @Payload() updateProductDto: UpdateProductDto
   ) {
     return this.productsService.update(updateProductDto.id, updateProductDto);
