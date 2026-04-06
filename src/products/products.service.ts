@@ -4,6 +4,8 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from './services/prisma.service';
 import { PaginationDto } from 'src/common';
 import { RpcException } from '@nestjs/microservices';
+import { FindProductsDto } from './dto/find-products.dto';
+import { catchError } from 'rxjs';
 
 @Injectable()
 export class ProductsService { //implements OnModuleInit {
@@ -44,7 +46,10 @@ export class ProductsService { //implements OnModuleInit {
       where: { id: id, available: true }
     });
 
-    if (!product) throw new RpcException({ message: `Product with id ${id} not found.`, status: HttpStatus.NOT_FOUND });
+    if (!product) throw new RpcException({
+      message: `Product with id ${id} not found.`,
+      status: HttpStatus.NOT_FOUND
+    });
 
     return product;
   }
@@ -58,6 +63,26 @@ export class ProductsService { //implements OnModuleInit {
       where: { id: id, available: true },
       data: data
     })
+  }
+
+  async findManyByIds(productIds: number[]) {
+    const products = await this.prisma.product.findMany({
+      where: { id: { in: productIds }, available: true },
+      select: {
+        id: true,
+        name: true,
+        price: true,
+      }
+    });
+
+    if (products.length !== productIds.length) {
+      throw new RpcException({
+        message: 'Some products were not found',
+        status: HttpStatus.BAD_REQUEST
+      });
+    }
+
+    return products;
   }
 
   async remove(id: number) {

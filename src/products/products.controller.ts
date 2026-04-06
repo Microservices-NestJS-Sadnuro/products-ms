@@ -4,6 +4,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PaginationDto } from 'src/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { FindProductsDto } from './dto/find-products.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -22,6 +23,12 @@ export class ProductsController {
   @MessagePattern({ cmd: 'find_one_product' })
   findOne(@Payload('id', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);
+  }
+
+  @MessagePattern({ cmd: 'find_many_by_ids' })
+  findManyByIds(@Payload() findProductsDto: FindProductsDto) {
+    console.log('Entry Produdts MS Controller - findManyByIds', findProductsDto);
+    return this.productsService.findManyByIds(findProductsDto.productIds);
   }
 
   //@Patch(':id)
