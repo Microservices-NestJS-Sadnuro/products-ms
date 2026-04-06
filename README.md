@@ -12,7 +12,7 @@ Microservicio responsable de la gestión del catálogo de productos y validació
 Modelo enfocado únicamente en los Productos para respetar las fronteras del dominio:
 ![Products ER Diagram](./docs/images/productsdb-ER.png)
 
-## Dev
+## Instalación
 1. Clonar repositorio
 2. Instalar dependencias: `npm install`
 3. Crear archivo `.env` basado en `env.template`
