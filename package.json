@@ -77,5 +77,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "overrides": {
+    "lodash": "^4.17.24",
+    "path-to-regexp": "^8.4.2",
+    "picomatch": "^4.0.4"
   }
 }
+
