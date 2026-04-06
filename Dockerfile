@@ -15,6 +15,7 @@ RUN npm install --omit=dev
 
 # Copiamos el prisma origin para asegurarnos de poder generar el cliente
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./
 RUN if [ -d "prisma" ]; then npx prisma generate; fi
 
 COPY --from=builder /app/dist ./dist
