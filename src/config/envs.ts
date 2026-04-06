@@ -3,12 +3,14 @@ import * as joi from 'joi';
 
 interface EnvVars {
     PORT: number;
+    HOST: string;
     DATABASE_URL: string;
 }
 
 // Environment Vars to validate before app running
 const envsSchema = joi.object({
     PORT: joi.number().required(),
+    HOST: joi.string().required(),
     DATABASE_URL: joi.string().required(),
 }).unknown(true);
 
@@ -22,5 +24,6 @@ if (error) {
 const envVars: EnvVars = value;
 export const envs = {
     port: envVars.PORT,
+    host: envVars.HOST,
     databaseUrl: envVars.DATABASE_URL,
 }

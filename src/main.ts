@@ -8,7 +8,7 @@ async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.TCP,
-    options: { port: envs.port }
+    options: { port: envs.port, host: envs.host }
   });
 
   // Asegura que se ejecuten las validaciones del class-validator en los request a apis.
