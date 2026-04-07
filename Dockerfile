@@ -23,8 +23,8 @@ COPY --from=builder /app/dist ./dist
 # Variables de entorno
 ENV NODE_ENV=production
 
-# Instala la CLI de prisma globalmente para que npx prisma funcione en prod
-RUN npm install -g prisma
+# Instala la CLI de prisma y tsx globalmente (necesario para ejecutar el seed manualmente)
+RUN npm install -g prisma tsx
 
 # Ejecuta migraciones ANTES de iniciar
 CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
