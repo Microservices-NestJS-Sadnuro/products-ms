@@ -17,7 +17,7 @@ Modelo enfocado únicamente en los Productos para respetar las fronteras del dom
 2. Instalar dependencias: `npm install`
 3. Crear archivo `.env` basado en `env.template`
 4. Ejecutar migración de prisma: `npx prisma migrate dev`
-5. Insertar datos iniciales (seed): `npm run db:seed`
+5. Insertar datos iniciales (seed): `docker exec -it products-ms npm run db:seed`
 6. Ejecutar el proyecto: `npm run start:dev`
 
 
